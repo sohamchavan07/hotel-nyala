@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -156,7 +157,7 @@ const Contact = () => {
                   <Mail className="w-6 h-6 text-primary mt-1" />
                   <div>
                     <h3 className="font-semibold mb-2">Email</h3>
-                    <p className="text-muted-foreground">[Your Email]</p>
+                    <p className="text-muted-foreground">hotelnyala1990@gmail.com</p>
                   </div>
                 </div>
               </CardContent>
@@ -178,11 +179,7 @@ const Contact = () => {
         </div>
       </main>
 
-      <footer className="bg-card border-t py-8 mt-12">
-        <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>&copy; 2025 Hotel Nyala. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

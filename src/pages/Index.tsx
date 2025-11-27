@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Header from "@/components/Header";
-import hotelHero from "@/assets/hotel-hero.jpg";
+import Footer from "@/components/Footer";
+import hotelHero from "@/assets/hotel.jpeg";
 import vegThali from "@/assets/veg-thali.jpg";
 import chickenThali from "@/assets/chicken-thali.jpg";
 import muttonThali from "@/assets/mutton-thali.jpg";
@@ -29,7 +30,7 @@ const Index = () => {
 
   const specialties = [
     { name: "Veg Thali", price: "From ₹80", image: vegThali },
-    { name: "Chicken Thali", price: "From ₹150", image: chickenThali },
+    { name: "Chicken Thali", price: "From ₹160", image: chickenThali },
     { name: "Mutton Thali", price: "₹200", image: muttonThali }
   ];
 
@@ -148,14 +149,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-card border-t py-8">
-        <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p className="font-semibold text-lg text-foreground mb-2">Hotel Nyala</p>
-          <p className="mb-2">Open Daily: 11:00 AM - 11:00 PM</p>
-          <p>&copy; 2025 Hotel Nyala. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

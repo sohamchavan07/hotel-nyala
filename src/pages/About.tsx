@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const About = () => {
   return (
@@ -39,11 +40,7 @@ const About = () => {
         </div>
       </main>
 
-      <footer className="bg-card border-t py-8 mt-12">
-        <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>&copy; 2025 Hotel Nyala. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import vegThali from "@/assets/veg-thali.jpg";
 import chickenThali from "@/assets/chicken-thali.jpg";
@@ -35,13 +36,13 @@ const Menu = () => {
     },
     {
       name: "Chicken Thali (Chapati)",
-      price: "₹150",
+      price: "₹160",
       image: chickenThali,
       description: "Delicious chicken curry served with chapati, rice, and sides"
     },
     {
       name: "Chicken Thali (Bhakari)",
-      price: "₹160",
+      price: "₹170",
       image: chickenThali,
       description: "Delicious chicken curry served with bhakari, rice, and sides"
     },
@@ -55,14 +56,14 @@ const Menu = () => {
 
   const currySection: MenuItem[] = [
     {
-      name: "Egg Curry (Single, Chapati)",
+      name: "Egg Curry (Chapati)",
       price: "₹100",
       image: eggCurry,
       description: "Single egg curry served with chapati"
     },
     {
-      name: "Egg Curry (single, Bhakari)",
-      price: "₹110",
+      name: "Egg Curry (Bhakari)",
+      price: "₹120",
       image: eggCurry,
       description: "Double egg curry served with bhakari"
     },
@@ -168,13 +169,7 @@ const Menu = () => {
         <MenuSection title="Sides & Accompaniments" items={sidesSection} />
       </main>
 
-      {/* Footer */}
-      <footer className="bg-card border-t py-8 mt-12">
-        <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>&copy; 2025 Hotel Nyala. All rights reserved.</p>
-          <p className="mt-2">Serving authentic Indian cuisine with love</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
