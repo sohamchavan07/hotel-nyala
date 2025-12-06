@@ -1,10 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
-import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -16,58 +17,128 @@ const Header = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMenuOpen]);
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2">
-            <div>
-              <h1 className="text-2xl font-bold text-primary">Hotel Nyala</h1>
-              <p className="text-xs text-muted-foreground">Since 1990</p>
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-300",
+        isScrolled
+          ? "border-b bg-card/98 backdrop-blur-md shadow-sm"
+          : "border-b bg-card/95 backdrop-blur-sm"
+      )}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex h-20 items-center justify-between">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="flex items-center space-x-3 group transition-transform hover:scale-105"
+          >
+            <div className="relative">
+              <h1 className="text-2xl sm:text-3xl font-bold text-primary tracking-tight">
+                Hotel Nyala
+              </h1>
+              <p className="text-[10px] sm:text-xs text-muted-foreground font-medium tracking-wider uppercase mt-0.5">
+                Since 1990
+              </p>
+              {/* Decorative underline */}
+              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isActive(item.path) ? "text-primary" : "text-foreground"
-                }`}
+                className={cn(
+                  "group relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-md",
+                  "hover:text-primary hover:bg-accent/50",
+                  isActive(item.path)
+                    ? "text-primary"
+                    : "text-foreground/80"
+                )}
               >
                 {item.name}
+                {/* Active indicator */}
+                {isActive(item.path) && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-primary rounded-full" />
+                )}
+                {/* Hover indicator */}
+                {!isActive(item.path) && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary rounded-full transition-all duration-300 group-hover:w-8" />
+                )}
               </Link>
             ))}
           </nav>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden p-2 rounded-md text-foreground hover:bg-accent hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
           >
-            <Menu className="h-6 w-6" />
+            {isMenuOpen ? (
+              <X className="h-6 w-6 transition-transform duration-200" />
+            ) : (
+              <Menu className="h-6 w-6 transition-transform duration-200" />
+            )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <nav className="md:hidden py-4 space-y-3">
+        <div
+          className={cn(
+            "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
+            isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          )}
+        >
+          <nav className="py-4 space-y-1 border-t mt-2">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
                 onClick={() => setIsMenuOpen(false)}
-                className={`block text-sm font-medium transition-colors hover:text-primary ${
-                  isActive(item.path) ? "text-primary" : "text-foreground"
-                }`}
+                className={cn(
+                  "block px-4 py-3 text-base font-medium rounded-md transition-all duration-200",
+                  "hover:bg-accent hover:text-primary",
+                  isActive(item.path)
+                    ? "text-primary bg-accent/50 border-l-4 border-primary"
+                    : "text-foreground/80"
+                )}
               >
                 {item.name}
               </Link>
             ))}
           </nav>
-        )}
+        </div>
       </div>
     </header>
   );
