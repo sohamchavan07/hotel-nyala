@@ -32,7 +32,7 @@ const About = () => {
             
             <div className="mt-8 p-6 bg-card border rounded-lg">
               <h2 className="text-2xl font-bold mb-4 text-primary">Visit Us</h2>
-              <p className="mb-2"><strong>Location:</strong> [Your Address]</p>
+              <p className="mb-2"><strong>Location:</strong> Shop no. 1524/1 near Ayodha Talkies,Kolhapur</p>
               <p className="mb-2"><strong>Hours:</strong> 11:00 AM - 11:00 PM Daily</p>
               <p><strong>Phone:</strong> 9970592229</p>
             </div>
