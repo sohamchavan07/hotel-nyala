@@ -192,7 +192,7 @@ const Contact = () => {
                   <MapPin className="w-6 h-6 text-primary mt-1" />
                   <div>
                     <h3 className="font-semibold mb-2">Location</h3>
-                    <p className="text-muted-foreground">[Your Full Address]</p>
+                    <p className="text-muted-foreground"> Shop no. 1524/1 near Ayodha Talkies,Kolhapur</p>
                     <p className="text-sm text-muted-foreground mt-1">Open Daily: 11:00 AM - 11:00 PM</p>
                   </div>
                 </div>
