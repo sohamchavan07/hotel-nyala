@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
+import { useStore } from "@/lib/store";
 import vegThali from "@/assets/veg-thali.jpg";
 import chickenThali from "@/assets/chicken-thali.jpg";
 import muttonThali from "@/assets/mutton-thali.jpg";
@@ -21,96 +22,152 @@ interface MenuItem {
 }
 
 const Menu = () => {
+  const { t } = useStore();
+
   const thaliSection: MenuItem[] = [
     {
-      name: "Veg Thali (Chapati)",
-      price: "₹80",
+      name: t("vegThaliChapati"),
+      price: "₹100",
       image: vegThali,
-      description: "Complete vegetarian meal with chapati, rice, dal, sabzi, and accompaniments"
+      description: t("descVegThali")
     },
     {
-      name: "Veg Thali (Bhakari)",
-      price: "₹90",
+      name: t("vegThaliBhakari"),
+      price: "₹110",
       image: vegThali,
-      description: "Complete vegetarian meal with bhakari, rice, dal, sabzi, and accompaniments"
+      description: t("descVegThali")
     },
     {
-      name: "Chicken Thali (Chapati)",
-      price: "₹160",
-      image: chickenThali,
-      description: "Delicious chicken curry served with chapati, rice, and sides"
-    },
-    {
-      name: "Chicken Thali (Bhakari)",
+      name: t("chickenChapatiThali"),
       price: "₹170",
       image: chickenThali,
-      description: "Delicious chicken curry served with bhakari, rice, and sides"
+      description: t("descChickenThali")
     },
     {
-      name: "Mutton Thali",
-      price: "₹200",
+      name: t("chickenBhakariThali"),
+      price: "₹180",
+      image: chickenThali,
+      description: t("descChickenThali")
+    },
+    {
+      name: t("muttonChapatiThali"),
+      price: "₹260",
       image: muttonThali,
-      description: "Tender mutton curry with your choice of bread, rice, and accompaniments"
+      description: t("descMuttonThali")
+    },
+    {
+      name: t("muttonBhakariThali"),
+      price: "₹280",
+      image: muttonThali,
+      description: t("descMuttonThali")
     },
   ];
 
   const currySection: MenuItem[] = [
     {
-      name: "Egg Curry (Chapati)",
-      price: "₹100",
+      name: t("eggCurryChapati"),
+      price: "₹110   / ₹130",
       image: eggCurry,
-      description: "Single egg curry served with chapati"
+      description: t("descEggCurry")
     },
     {
-      name: "Egg Curry (Bhakari)",
-      price: "₹120",
+      name: t("eggCurryBhakari"),
+      price: "₹120 / ₹140",
       image: eggCurry,
-      description: "Double egg curry served with bhakari"
+      description: t("descEggCurry")
+    },
+    {
+      name: t("muttonPlate"),
+      price: "₹200",
+      image: muttonThali,
+      description: t("descMuttonThali")
+    },
+    {
+      name: t("chickenPlate"),
+      price: "₹100",
+      image: chickenThali,
+      description: t("descChickenThali")
+    },
+    {
+      name: t("singleEggCurryPlate"),
+      price: "₹50",
+      image: eggCurry,
+      description: t("descEggCurry")
     },
   ];
 
   const sidesSection: MenuItem[] = [
-    { 
-      name: "Papad", 
-      price: "₹10", 
-      image: papad,
-      description: "Crispy roasted lentil crackers"
-    },
-    { 
-      name: "Buttermilk (Chaas)", 
-      price: "₹15", 
-      image: buttermilk,
-      description: "Traditional refreshing spiced yogurt drink"
-    },
-    { 
-      name: "Steamed Rice", 
-      price: "₹20", 
-      image: rice,
-      description: "Fluffy steamed basmati rice"
-    },
-    { 
-      name: "Aamti", 
-      price: "₹20", 
-      image: aamti,
-      description: "Traditional Maharashtrian tangy dal with kokum and jaggery"
-    },
-    { 
-      name: "Chapati", 
-      price: "₹15", 
-      image: chapati,
-      description: "Soft whole wheat flatbread"
-    },
-    { 
-      name: "Bhakari", 
-      price: "₹20", 
-      image: bhakari,
-      description: "Traditional thick flatbread made from jowar or bajra flour"
-    },
-    { 
-      name: "Bhaji", 
-      price: "₹20", 
+    {
+      name: t("twoChapatiBhaji"),
+      price: "₹60",
       image: bhaji,
-      description: "Spiced mixed vegetable curry"
+      description: t("descBhaji")
+    },
+    {
+      name: t("riceAamtiVaran"),
+      price: "₹50",
+      image: aamti,
+      description: t("descAamti")
+    },
+    {
+      name: t("bhajiPlate"),
+      price: "₹30",
+      image: bhaji,
+      description: t("descBhaji")
+    },
+    {
+      name: t("ricePlate"),
+      price: "₹20",
+      image: rice,
+      description: t("descRice")
+    },
+    {
+      name: t("chapati"),
+      price: "₹15",
+      image: chapati,
+      description: t("descChapati")
+    },
+    {
+      name: t("bhakari"),
+      price: "₹25",
+      image: bhakari,
+      description: t("descBhakari")
+    },
+    {
+      name: t("papad"),
+      price: "₹10",
+      image: papad,
+      description: t("descPapad")
+    },
+    {
+      name: t("aamtiVati"),
+      price: "₹30",
+      image: aamti,
+      description: t("descAamti")
+    },
+    {
+      name: t("taak"),
+      price: "₹15",
+      image: buttermilk,
+      description: t("descTaak")
+    },
+    {
+      name: t("dahiVati"),
+      price: "₹15",
+      image: aamti, // Assuming a similar placeholder if dahi image missing
+      description: t("dahiVati")
+    },
+    {
+      name: t("boilEgg"),
+      price: "₹15",
+      image: eggCurry,
+      description: t("boilEgg")
+    },
+    {
+      name: t("rassaVati"),
+      price: "₹30",
+      image: aamti,
+      description: t("rassaVati")
     },
   ];
 
@@ -151,22 +208,22 @@ const Menu = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="relative py-16 bg-gradient-to-r from-primary to-secondary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Menu</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t("ourMenu")}</h1>
           <p className="text-xl md:text-2xl opacity-90">
-            Traditional Indian Cuisine with Authentic Flavors
+            {t("tagline")}
           </p>
         </div>
       </section>
 
       {/* Menu Content */}
       <main className="container mx-auto px-4 py-12">
-        <MenuSection title="Thali Meals" items={thaliSection} />
-        <MenuSection title="Curry Specials" items={currySection} />
-        <MenuSection title="Sides & Accompaniments" items={sidesSection} />
+        <MenuSection title={t("thaliSection")} items={thaliSection} />
+        <MenuSection title={t("currySection")} items={currySection} />
+        <MenuSection title={t("sidesSection")} items={sidesSection} />
       </main>
 
       <Footer />
@@ -175,3 +232,4 @@ const Menu = () => {
 };
 
 export default Menu;
+

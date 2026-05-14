@@ -7,8 +7,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import { useStore } from "@/lib/store";
 
 const Contact = () => {
+  const { t } = useStore();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,7 +25,7 @@ const Contact = () => {
     // Basic validation
     if (!formData.name.trim()) {
       toast({
-        title: "Name required",
+        title: t("name") + " required",
         description: "Please enter your name",
         variant: "destructive"
       });
@@ -41,7 +43,7 @@ const Contact = () => {
     
     if (!formData.message.trim()) {
       toast({
-        title: "Message required",
+        title: t("message") + " required",
         description: "Please enter your message",
         variant: "destructive"
       });
@@ -103,21 +105,21 @@ const Contact = () => {
       <Header />
       
       <main className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8 text-center text-primary">Contact Us</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center text-primary">{t("contactTitle")}</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* Contact Form */}
           <Card>
             <CardHeader>
-              <CardTitle>Send us a Message</CardTitle>
-              <CardDescription>We'll get back to you as soon as possible</CardDescription>
+              <CardTitle>{t("getInTouch")}</CardTitle>
+              <CardDescription>{t("tagline")}</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <Input 
                     name="name"
-                    placeholder="Your Name" 
+                    placeholder={t("name")} 
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -127,7 +129,7 @@ const Contact = () => {
                   <Input 
                     name="email"
                     type="email" 
-                    placeholder="Your Email" 
+                    placeholder={t("email")} 
                     value={formData.email}
                     onChange={handleChange}
                     required
@@ -137,7 +139,7 @@ const Contact = () => {
                   <Input 
                     name="phone"
                     type="tel" 
-                    placeholder="Your Phone" 
+                    placeholder={t("phone")} 
                     value={formData.phone}
                     onChange={handleChange}
                   />
@@ -145,7 +147,7 @@ const Contact = () => {
                 <div>
                   <Textarea 
                     name="message"
-                    placeholder="Your Message" 
+                    placeholder={t("message")} 
                     rows={5} 
                     value={formData.message}
                     onChange={handleChange}
@@ -153,7 +155,7 @@ const Contact = () => {
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                  {isSubmitting ? "..." : t("sendMessage")}
                 </Button>
               </form>
             </CardContent>
@@ -166,9 +168,9 @@ const Contact = () => {
                 <div className="flex items-start space-x-4">
                   <Phone className="w-6 h-6 text-primary mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-2">Phone</h3>
+                    <h3 className="font-semibold mb-2">{t("phone")}</h3>
                     <p className="text-muted-foreground">9970592229</p>
-                    <p className="text-sm text-muted-foreground mt-1">Available 11:00 AM - 11:00 PM</p>
+                    <p className="text-sm text-muted-foreground mt-1">{t("hoursValue")}</p>
                   </div>
                 </div>
               </CardContent>
@@ -179,7 +181,7 @@ const Contact = () => {
                 <div className="flex items-start space-x-4">
                   <Mail className="w-6 h-6 text-primary mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-2">Email</h3>
+                    <h3 className="font-semibold mb-2">{t("email")}</h3>
                     <p className="text-muted-foreground">hotelnyala1990@gmail.com</p>
                   </div>
                 </div>
@@ -191,9 +193,9 @@ const Contact = () => {
                 <div className="flex items-start space-x-4">
                   <MapPin className="w-6 h-6 text-primary mt-1" />
                   <div>
-                    <h3 className="font-semibold mb-2">Location</h3>
-                    <p className="text-muted-foreground"> Shop no. 1524/1 near Ayodha Talkies,Kolhapur</p>
-                    <p className="text-sm text-muted-foreground mt-1">Open Daily: 11:00 AM - 11:00 PM</p>
+                    <h3 className="font-semibold mb-2">{t("location")}</h3>
+                    <p className="text-muted-foreground">{t("locationValue")}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{t("hoursValue")}</p>
                   </div>
                 </div>
               </CardContent>
@@ -208,3 +210,4 @@ const Contact = () => {
 };
 
 export default Contact;
+
