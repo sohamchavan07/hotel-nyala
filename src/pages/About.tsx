@@ -1,40 +1,36 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useStore } from "@/lib/store";
 
 const About = () => {
+  const { t } = useStore();
+  
   return (
     <div className="min-h-screen">
       <Header />
       
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl font-bold mb-6 text-primary">About Hotel Nyala</h1>
+          <h1 className="text-4xl font-bold mb-6 text-primary">{t("aboutTitle")}</h1>
           
           <div className="space-y-6 text-lg">
             <p>
-              Welcome to Hotel Nyala, where traditional Indian hospitality meets authentic cuisine. 
-              Since 1990, we have been serving delicious, home-style meals that bring the warmth and 
-              flavors of India to your table.
+              {t("aboutPara1")}
             </p>
             
             <p>
-              Our specialty lies in our traditional Maharashtrian thali meals, prepared with fresh 
-              ingredients and time-honored recipes passed down through generations. From our signature 
-              Aamti (tangy dal with kokum and jaggery) to authentic bhakari made from jowar and bajra 
-              flour, each dish is crafted with care, ensuring an authentic taste that reminds you of home.
+              {t("aboutPara2")}
             </p>
             
             <p>
-              Whether you're craving a hearty vegetarian thali or our signature mutton curry, 
-              Hotel Nyala offers a dining experience that celebrates the rich culinary heritage 
-              of India in a welcoming, family-friendly atmosphere.
+              {t("aboutPara3")}
             </p>
             
             <div className="mt-8 p-6 bg-card border rounded-lg">
-              <h2 className="text-2xl font-bold mb-4 text-primary">Visit Us</h2>
-              <p className="mb-2"><strong>Location:</strong> Shop no. 1524/1 near Ayodha Talkies,Kolhapur</p>
-              <p className="mb-2"><strong>Hours:</strong> 11:00 AM - 11:00 PM Daily</p>
-              <p><strong>Phone:</strong> 9970592229</p>
+              <h2 className="text-2xl font-bold mb-4 text-primary">{t("visitUs")}</h2>
+              <p className="mb-2"><strong>{t("location")}:</strong> {t("locationValue")}</p>
+              <p className="mb-2"><strong>{t("hours")}:</strong> {t("hoursValue")}</p>
+              <p><strong>{t("phone")}:</strong> 9970592229</p>
             </div>
           </div>
         </div>
@@ -46,3 +42,4 @@ const About = () => {
 };
 
 export default About;
+

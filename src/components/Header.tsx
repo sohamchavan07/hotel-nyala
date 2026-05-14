@@ -1,21 +1,27 @@
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { useStore } from "@/lib/store";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { language, setLanguage, t } = useStore();
 
   const navItems = [
-    { name: "Home", path: "/" },
-    { name: "Menu", path: "/menu" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    { name: t("home"), path: "/" },
+    { name: t("menu"), path: "/menu" },
+    { name: t("about"), path: "/about" },
+    { name: t("contact"), path: "/contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const toggleLanguage = () => {
+    setLanguage(language === "en" ? "mr" : "en");
+  };
 
   // Handle scroll effect
   useEffect(() => {
@@ -64,7 +70,7 @@ const Header = () => {
                 Hotel Nyala
               </h1>
               <p className="text-[10px] sm:text-xs text-muted-foreground font-medium tracking-wider uppercase mt-0.5">
-                Since 1990
+                {t("since")}
               </p>
               {/* Decorative underline */}
               <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
@@ -96,21 +102,39 @@ const Header = () => {
                 )}
               </Link>
             ))}
+            
+            {/* Language Switcher */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center space-x-1 px-4 py-2 text-sm font-medium transition-all duration-200 rounded-md hover:bg-accent hover:text-primary ml-2"
+              title={language === "en" ? "मराठीत बदला" : "Switch to English"}
+            >
+              <Globe className="h-4 w-4" />
+              <span>{language === "en" ? "MR" : "EN"}</span>
+            </button>
           </nav>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 rounded-md text-foreground hover:bg-accent hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? (
-              <X className="h-6 w-6 transition-transform duration-200" />
-            ) : (
-              <Menu className="h-6 w-6 transition-transform duration-200" />
-            )}
-          </button>
+          <div className="flex items-center md:hidden space-x-2">
+            <button
+              onClick={toggleLanguage}
+              className="p-2 rounded-md text-foreground hover:bg-accent hover:text-primary transition-colors"
+            >
+              <Globe className="h-5 w-5" />
+            </button>
+            <button
+              className="p-2 rounded-md text-foreground hover:bg-accent hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
+            >
+              {isMenuOpen ? (
+                <X className="h-6 w-6 transition-transform duration-200" />
+              ) : (
+                <Menu className="h-6 w-6 transition-transform duration-200" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -145,3 +169,4 @@ const Header = () => {
 };
 
 export default Header;
+

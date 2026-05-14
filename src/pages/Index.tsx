@@ -8,30 +8,33 @@ import vegThali from "@/assets/veg-thali.jpg";
 import chickenThali from "@/assets/chicken-thali.jpg";
 import muttonThali from "@/assets/mutton-thali.jpg";
 import { UtensilsCrossed, Clock, Award } from "lucide-react";
+import { useStore } from "@/lib/store";
 
 const Index = () => {
+  const { t } = useStore();
+
   const features = [
     {
       icon: UtensilsCrossed,
-      title: "Authentic Cuisine",
-      description: "Traditional Indian recipes made with fresh ingredients"
+      title: t("authenticCuisine"),
+      description: t("authenticCuisineDesc")
     },
     {
       icon: Clock,
-      title: "Quick Service",
-      description: "Hot, delicious meals served promptly"
+      title: t("quickService"),
+      description: t("quickServiceDesc")
     },
     {
       icon: Award,
-      title: "Quality Food",
-      description: "Highest standards in taste and hygiene"
+      title: t("qualityFood"),
+      description: t("qualityFoodDesc")
     }
   ];
 
   const specialties = [
-    { name: "Veg Thali", price: "From ₹80", image: vegThali },
-    { name: "Chicken Thali", price: "From ₹160", image: chickenThali },
-    { name: "Mutton Thali", price: "₹200", image: muttonThali }
+    { name: t("vegThaliChapati"), price: `${t("from")} ₹80`, image: vegThali },
+    { name: t("chickenChapatiThali"), price: `${t("from")} ₹160`, image: chickenThali },
+    { name: t("muttonChapatiThali"), price: "₹260", image: muttonThali }
   ];
 
   return (
@@ -48,17 +51,17 @@ const Index = () => {
         </div>
         
         <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-          <p className="text-lg md:text-xl mb-2 opacity-80 font-medium">Since 1990</p>
+          <p className="text-lg md:text-xl mb-2 opacity-80 font-medium">{t("since")}</p>
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Welcome to Hotel Nyala
+            {t("welcome")}
           </h1>
           <p className="text-xl md:text-2xl mb-8 opacity-90">
-            Experience the authentic flavors of traditional Indian cuisine
+            {t("homeTagline")}
           </p>
           <div className="flex justify-center">
             <Link to="/menu">
               <Button size="lg" variant="default" className="text-lg px-8">
-                View Our Menu
+                {t("viewMenu")}
               </Button>
             </Link>
           </div>
@@ -69,7 +72,7 @@ const Index = () => {
       <section className="py-16 bg-card">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-primary">
-            Why Choose Hotel Nyala
+            {t("whyChooseUs")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
@@ -89,10 +92,10 @@ const Index = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-primary">
-            Our Specialties
+            {t("ourSpecialties")}
           </h2>
           <p className="text-center text-muted-foreground mb-12 text-lg">
-            Delicious thali meals prepared with care and tradition
+            {t("specialtiesDesc")}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {specialties.map((item, index) => (
@@ -114,7 +117,7 @@ const Index = () => {
           <div className="text-center mt-10">
             <Link to="/menu">
               <Button size="lg" variant="outline" className="text-lg">
-                See Full Menu
+                {t("seeFullMenu")}
               </Button>
             </Link>
           </div>
@@ -125,15 +128,15 @@ const Index = () => {
       <section className="py-16 bg-gradient-to-r from-primary to-secondary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Experience Authentic Indian Cuisine?
+            {t("readyToExperience")}
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Visit us today for an authentic dining experience
+            {t("visitUsToday")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/menu">
               <Button size="lg" variant="secondary" className="text-lg px-8">
-                View Menu
+                {t("viewMenu")}
               </Button>
             </Link>
             <Link to="/contact">
@@ -142,7 +145,7 @@ const Index = () => {
                 variant="secondary"
                 className="text-lg px-8"
               >
-                Contact Us
+                {t("contactUs")}
               </Button>
             </Link>
           </div>
@@ -155,3 +158,4 @@ const Index = () => {
 };
 
 export default Index;
+
